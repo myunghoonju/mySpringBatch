@@ -1,3 +1,4 @@
+/*
 package com.practice.batch.config;
 
 import lombok.RequiredArgsConstructor;
@@ -32,3 +33,4 @@ public class JobParamTest implements ApplicationRunner {
         jobLauncher.run(job, params);
     }
 }
+*/

@@ -59,6 +59,7 @@ public class JobConfiguration {
                 .tasklet((contribution, chunkContext) -> {
                     log.info("jobStepTwo executed");
                     return RepeatStatus.FINISHED;
+                    //throw new RuntimeException("stepTwo failed");
                 })
                 .build();
     }
