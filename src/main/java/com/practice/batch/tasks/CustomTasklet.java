@@ -1,3 +1,4 @@
+/*
 package com.practice.batch.tasks;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,3 +31,4 @@ public class CustomTasklet implements Tasklet {
         return RepeatStatus.FINISHED;
     }
 }
+*/

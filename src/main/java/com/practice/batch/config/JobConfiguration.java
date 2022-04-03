@@ -1,3 +1,4 @@
+/*
 package com.practice.batch.config;
 
 import com.practice.batch.tasks.CustomTasklet;
@@ -24,6 +25,7 @@ public class JobConfiguration {
         return jobBuilderFactory.get("jobConf")
                 .start(jobStepOne())
                 .next(jobStepTwo())
+                .next(jobStepThree())
                 .build();
     }
 
@@ -45,4 +47,16 @@ public class JobConfiguration {
                 .build();
     }
 
+    @Bean
+    public Step jobStepThree() {
+        return stepBuilderFactory.get("jobStepThree")
+                .tasklet((contribution, chunkContext) -> {
+                    log.info("jobStepThree executed");
+                    return RepeatStatus.FINISHED;
+                    //throw new RuntimeException("stepTwo failed");
+                })
+                .build();
+    }
+
 }
+*/
