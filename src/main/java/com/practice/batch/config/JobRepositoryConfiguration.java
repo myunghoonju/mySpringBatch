@@ -1,3 +1,4 @@
+/*
 package com.practice.batch.config;
 
 import com.practice.batch.listener.JobRepositoryListener;
@@ -54,3 +55,4 @@ public class JobRepositoryConfiguration {
                 .build();
     }
 }
+*/

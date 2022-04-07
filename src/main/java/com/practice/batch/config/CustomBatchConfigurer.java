@@ -1,3 +1,4 @@
+/*
 package com.practice.batch.config;
 
 import org.springframework.batch.core.repository.JobRepository;
@@ -30,3 +31,4 @@ public class CustomBatchConfigurer extends BasicBatchConfigurer {
         return factoryBean.getObject();
     }
 }
+*/

@@ -30,5 +30,7 @@ spring:
   batch:
     jdbc:
       initialize-schema: always # develop only use never
+      #table-prefix: SYSTEM_
     job:
-      enabled: false #disable auto run job
+      names: ${job.name:NONE}
+      enabled: true #disable auto run job
