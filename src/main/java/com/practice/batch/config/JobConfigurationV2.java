@@ -30,7 +30,7 @@ public class JobConfigurationV2 {
                 .start(stepOne())
                 .next(stepTwo())
                 //.incrementer()
-                //.preventRestart()
+                .preventRestart() // JobInstance already exists and is not restartable
                 //.validator(new CustomJobParameterValidator())
                 .validator(new DefaultJobParametersValidator(reqKey, optKey))
                 //.listener()
@@ -52,7 +52,7 @@ public class JobConfigurationV2 {
         return stepBuilderFactory.get("stepTwo")
                 .tasklet((contribution, chunkContext) -> {
                     log.info("stepTwo executed");
-                    return RepeatStatus.FINISHED;
+                    throw new RuntimeException("preventRestart test");
                 })
                 .build();
     }
