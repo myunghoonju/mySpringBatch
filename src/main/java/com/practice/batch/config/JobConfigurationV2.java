@@ -1,12 +1,14 @@
 package com.practice.batch.config;
 
 
+import com.practice.batch.config.validator.CustomJobParameterValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.job.DefaultJobParametersValidator;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +20,9 @@ public class JobConfigurationV2 {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
+    private static final String[] reqKey = {"date", "name"};
+    private static final String[] optKey = {"count"};
+
 
     @Bean
     public Job jobConf() {
@@ -26,7 +31,8 @@ public class JobConfigurationV2 {
                 .next(stepTwo())
                 //.incrementer()
                 //.preventRestart()
-                //.validator()
+                //.validator(new CustomJobParameterValidator())
+                .validator(new DefaultJobParametersValidator(reqKey, optKey))
                 //.listener()
                 .build();
     }
