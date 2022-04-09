@@ -1,7 +1,7 @@
 package com.practice.batch.config;
 
 
-import com.practice.batch.config.validator.CustomJobParameterValidator;
+import com.practice.batch.config.custom.customJobParametersIncrementer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
@@ -9,6 +9,7 @@ import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.job.DefaultJobParametersValidator;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.repeat.RepeatStatus;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,10 +30,11 @@ public class JobConfigurationV2 {
         return jobBuilderFactory.get("jobConf")
                 .start(stepOne())
                 .next(stepTwo())
-                //.incrementer()
+                //.incrementer(new customJobParametersIncrementer())
+                .incrementer(new RunIdIncrementer())
                 .preventRestart() // JobInstance already exists and is not restartable
                 //.validator(new CustomJobParameterValidator())
-                .validator(new DefaultJobParametersValidator(reqKey, optKey))
+                //.validator(new DefaultJobParametersValidator(reqKey, optKey))
                 //.listener()
                 .build();
     }
@@ -52,7 +54,7 @@ public class JobConfigurationV2 {
         return stepBuilderFactory.get("stepTwo")
                 .tasklet((contribution, chunkContext) -> {
                     log.info("stepTwo executed");
-                    throw new RuntimeException("preventRestart test");
+                    return RepeatStatus.FINISHED;
                 })
                 .build();
     }
