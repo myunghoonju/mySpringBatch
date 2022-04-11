@@ -31,8 +31,8 @@ public class JobConfigurationV2 {
                 .start(stepOne())
                 .next(stepTwo())
                 //.incrementer(new customJobParametersIncrementer())
-                .incrementer(new RunIdIncrementer())
-                .preventRestart() // JobInstance already exists and is not restartable
+                //.incrementer(new RunIdIncrementer())
+                //.preventRestart() // JobInstance already exists and is not restartable
                 //.validator(new CustomJobParameterValidator())
                 //.validator(new DefaultJobParametersValidator(reqKey, optKey))
                 //.listener()
@@ -46,6 +46,7 @@ public class JobConfigurationV2 {
                     log.info("stepOne executed");
                     return RepeatStatus.FINISHED;
                 })
+                .allowStartIfComplete(true)
                 .build();
     }
 
@@ -54,8 +55,10 @@ public class JobConfigurationV2 {
         return stepBuilderFactory.get("stepTwo")
                 .tasklet((contribution, chunkContext) -> {
                     log.info("stepTwo executed");
-                    return RepeatStatus.FINISHED;
+                    //return RepeatStatus.FINISHED;
+                    throw new RuntimeException("startLimit test");
                 })
+                .startLimit(6)
                 .build();
     }
 }
