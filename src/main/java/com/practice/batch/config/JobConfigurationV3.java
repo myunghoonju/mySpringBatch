@@ -29,7 +29,12 @@ public class JobConfigurationV3 {
     public Job parentJob() {
         return jobBuilderFactory.get("parentJob")
                 .start(jobStep(null))
-                .next(stepTwo())
+                .on("COMPLETED")
+                .to(stepThree())
+                .from(jobStep(null))
+                .on("FAILED")
+                .to(stepTwo())
+                .end()
                 .build();
     }
 
@@ -71,7 +76,8 @@ public class JobConfigurationV3 {
         return stepBuilderFactory.get("stepOne")
                 .tasklet((contribution, chunkContext) -> {
                     log.info("stepOne executed");
-                    return RepeatStatus.FINISHED;
+                    //return RepeatStatus.FINISHED;
+                    throw new RuntimeException("stepOne failed");
                 })
                 .allowStartIfComplete(true)
                 .build();
@@ -86,6 +92,17 @@ public class JobConfigurationV3 {
                     //throw new RuntimeException("startLimit test");
                 })
                 .startLimit(6)
+                .build();
+    }
+
+    @Bean
+    public Step stepThree() {
+        return stepBuilderFactory.get("stepThree")
+                .tasklet((contribution, chunkContext) -> {
+                    log.info("stepThree executed");
+                    return RepeatStatus.FINISHED;
+                    //throw new RuntimeException("startLimit test");
+                })
                 .build();
     }
 }
