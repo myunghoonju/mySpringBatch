@@ -2,6 +2,7 @@ package com.practice.batch.config;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -86,7 +87,8 @@ public class FlowJobConfig {
         return stepBuilderFactory.get("step4")
                 .tasklet((contribution, chunkContext) -> {
                     log.info("step4 executed");
-                    throw new RuntimeException("step4 failed");
+                    contribution.setExitStatus(ExitStatus.FAILED);
+                    return RepeatStatus.FINISHED;
                 })
                 .build();
     }

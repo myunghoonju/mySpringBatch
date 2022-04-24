@@ -29,11 +29,11 @@ public class JobConfigurationV3 {
     public Job parentJob() {
         return jobBuilderFactory.get("parentJob")
                 .start(jobStep(null))
-                .on("COMPLETED")
-                .to(stepThree())
+                    .on("COMPLETED")
+                    .to(stepThree())
                 .from(jobStep(null))
-                .on("FAILED")
-                .to(stepTwo())
+                    .on("FAILED")
+                    .to(stepTwo())
                 .end()
                 .build();
     }
@@ -77,6 +77,7 @@ public class JobConfigurationV3 {
                 .tasklet((contribution, chunkContext) -> {
                     log.info("stepOne executed");
                     //return RepeatStatus.FINISHED;
+                    contribution.setExitStatus(ExitStatus.FAILED);
                     throw new RuntimeException("stepOne failed");
                 })
                 .allowStartIfComplete(true)
