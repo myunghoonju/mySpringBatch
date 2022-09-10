@@ -25,7 +25,7 @@ public class JobConfigurationV3 {
     private final StepBuilderFactory stepBuilderFactory;
 
 
-    @Bean
+    //@Bean
     public Job parentJob() {
         return jobBuilderFactory.get("parentJob")
                 .start(jobStep(null))
@@ -38,7 +38,7 @@ public class JobConfigurationV3 {
                 .build();
     }
 
-    @Bean
+   // @Bean
     public Step jobStep(JobLauncher launcher) {
         return stepBuilderFactory.get("jobStep")
                 .job(childJob())
@@ -64,14 +64,14 @@ public class JobConfigurationV3 {
         return extractor;
     }
 
-    @Bean
+  //  @Bean
     public Job childJob() {
         return jobBuilderFactory.get("childJob")
                 .start(stepOne())
                 .build();
     }
 
-    @Bean
+ //   @Bean
     public Step stepOne() {
         return stepBuilderFactory.get("stepOne")
                 .tasklet((contribution, chunkContext) -> {
@@ -84,7 +84,7 @@ public class JobConfigurationV3 {
                 .build();
     }
 
-    @Bean
+   // @Bean
     public Step stepTwo() {
         return stepBuilderFactory.get("stepTwo")
                 .tasklet((contribution, chunkContext) -> {
@@ -96,7 +96,7 @@ public class JobConfigurationV3 {
                 .build();
     }
 
-    @Bean
+   // @Bean
     public Step stepThree() {
         return stepBuilderFactory.get("stepThree")
                 .tasklet((contribution, chunkContext) -> {

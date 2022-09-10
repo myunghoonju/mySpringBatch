@@ -21,7 +21,7 @@ public class FlowJobConfig {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
-    @Bean
+    //@Bean
     public Job batchJob() {
         return jobBuilderFactory.get("batchJob")
                 .start(flowA())
@@ -42,7 +42,7 @@ public class FlowJobConfig {
         return builder.build();
     }
 
-    @Bean
+    //@Bean
     public Step step1() {
         return stepBuilderFactory.get("step1")
                 .tasklet((contribution, chunkContext) -> {
@@ -52,7 +52,7 @@ public class FlowJobConfig {
                 .build();
     }
 
-    @Bean
+   // @Bean
     public Step step2() {
         return stepBuilderFactory.get("step2")
                 .tasklet((contribution, chunkContext) -> {
@@ -62,7 +62,7 @@ public class FlowJobConfig {
                 .build();
     }
 
-    @Bean
+  //  @Bean
     public Step step3() {
         return stepBuilderFactory.get("step3")
                 .tasklet((contribution, chunkContext) -> {
@@ -72,7 +72,7 @@ public class FlowJobConfig {
                 .build();
     }
 
-    @Bean
+  //  @Bean
     public Flow flowB() {
         FlowBuilder<Flow> builder = new FlowBuilder<>("flowB");
         builder
@@ -82,7 +82,7 @@ public class FlowJobConfig {
         return builder.build();
     }
 
-    @Bean
+//    @Bean
     public Step step4() {
         return stepBuilderFactory.get("step4")
                 .tasklet((contribution, chunkContext) -> {
@@ -93,7 +93,7 @@ public class FlowJobConfig {
                 .build();
     }
 
-    @Bean
+//    @Bean
     public Step step5() {
         return stepBuilderFactory.get("step5")
                 .tasklet((contribution, chunkContext) -> {
@@ -103,7 +103,7 @@ public class FlowJobConfig {
                 .build();
     }
 
-    @Bean
+   // @Bean
     public Step step6() {
         return stepBuilderFactory.get("step6")
                 .tasklet((contribution, chunkContext) -> {

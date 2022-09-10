@@ -20,7 +20,7 @@ public class ExitStatusConfigTest {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
-    @Bean
+    //@Bean
     public Job exitBatchJob() {
         return jobBuilderFactory.get("exitBatchJob")
                 .start(exitStep1())

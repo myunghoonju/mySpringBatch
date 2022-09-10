@@ -21,7 +21,7 @@ public class DeciderConfigTest {
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
 
-    @Bean
+    //@Bean
     public Job deciderBatchJob() {
         return jobBuilderFactory.get("deciderBatchJob")
                 .incrementer(new RunIdIncrementer())
